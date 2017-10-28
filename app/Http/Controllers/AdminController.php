@@ -52,7 +52,7 @@ class AdminController extends Controller
    }
 
    public function getListProduct(){
-        $product_list = Product::select('id','name','unit_price','promotion_price')->paginate(10);
+        $product_list = Product::select('id','name','unit_price','promotion_price', 'image')->paginate(10);
         return view('admin_panel.pages.product_list',compact('product_list'));
    }
 
@@ -286,6 +286,16 @@ class AdminController extends Controller
                                       ORDER BY sum_pr DESC
                                     "));
       echo json_encode($month_data);
+  }
+
+  public function getDeleteCate($id){
+    $checkDelete = ProductType::find($id);
+    if ($checkDelete->products()->count() == 0) {
+      ProductType::destroy($id);
+      return "deleted";
+    }else{
+      return 0;
+    }
   }
 }
 	

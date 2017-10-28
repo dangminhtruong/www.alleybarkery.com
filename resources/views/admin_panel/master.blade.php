@@ -100,10 +100,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="clearfix"></div>
 </div>
 <script src="{!! url('admin_panel/js/jquery-2.1.1.min.js') !!}"></script> 
-<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="{!! url('admin_panel/js/jquery-ui.js') !!}"></script>
 <script src="{!! url('admin_panel/js/jquery.nicescroll.js') !!}"></script>
 <script src="{!! url('admin_panel/js/scripts.js') !!}"></script>
 <script src="{!! url('admin_panel/js/bootstrap.js') !!}"></script>
 <script src="{!! url('admin_panel/js/Chart.min.js') !!}"></script>
+<script src="{!! url('admin_panel/js/sweetalert.min.js') !!}"></script>
 <script src="{!! url('admin_panel/js/admin_script.js') !!}"></script>
 </body>

@@ -13,6 +13,7 @@
                     <tr align="center">
                         <th>ID</th>
                         <th>Name</th>
+                        <th>Images</th>
                         <th>Unit Price</th>
                         <th>Promotion Price</th>
                         <th>Delete</th>
@@ -24,9 +25,13 @@
                         <tr class="odd gradeX" align="center">
                             <td>{!! $item->id !!}</td>
                             <td>{!! $item->name !!}</td>
+                            <td><img src="{!! url('source/image/product/', [$item->image]) !!}" height="30px" width="60px" alt=""></td>
                             <td>{!! number_format($item->unit_price).'vnđ' !!}</td>
                             <td>{!! number_format($item->promotion_price).'vnđ' !!}</td>
-                            <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{!! url('admin/product/delete',[$item->id]) !!}"> Delete</a></td>
+                            <td class="center"><i class="fa fa-pencil fa-fw"></i> 
+                                <button type="button" class="btn btn-link btn-delete-product" value="{!! $item->id !!}">Delete</button> 
+                                <a id="link{!! $item->id !!}" type="hidden" href="{!! url('admin/product/delete',[$item->id]) !!}"></a>
+                            </td>
                             <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{!! url('admin/product/edit',[$item->id]) !!}">Edit</a></td>
                         </tr>
                     @endforeach

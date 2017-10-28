@@ -22,15 +22,26 @@
                     <tr align="center">
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Edit</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($cate_list as $item)
-                        <tr class="odd gradeX" align="center">
+                        <tr class="odd gradeX" align="center" id="cate{!! $item->id !!}">
                             <td>{!! $item->id !!}</td>
                             <td>{!! $item->name !!}</td>
-                            <td class="center"><i class="fa fa-pencil fa-fw"></i> <button class="btn btn-link edit_cate_a" value="{!! $item->id !!}">Edit</button></td>
+                            <td class="center" style="max-width: 10vh;">
+                              <div class="form-group">
+                                <button class="btn btn-link edit_cate_a" value="{!! $item->id !!}">
+                                <i class="fa fa-pencil fa-fw"></i> 
+                                Edit
+                              </button>
+                              <button class="btn btn-link delete_cate" value="{!! $item->id !!}">
+                                <i class="fa fa-trash-o" aria-hidden="true"></i> 
+                                Delete
+                              </button>
+                              </div>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

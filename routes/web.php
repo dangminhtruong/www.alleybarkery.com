@@ -60,6 +60,7 @@ Route::group(['prefix' => 'admin','middleware' => 'check.admin'], function() {
         Route::post('add', ['as' => 'postAddCate', 'uses' => 'AdminController@postAddCate']);
         Route::post('edit', ['as' => 'postEditCate', 'uses' => 'AdminController@postEditCate']);
         Route::post('edit-data', ['as' => 'postEditDataCate', 'uses' => 'AdminController@postEditDataCate']);
+        Route::get('delete-cate/{id}', 'AdminController@getDeleteCate')->name('getDeleteCate');
     });
 
     Route::group(['prefix' => 'oders'], function() {
