@@ -79,6 +79,8 @@ Route::group(['prefix' => 'admin','middleware' => 'check.admin'], function() {
         Route::post('start-end-done',['as' => 'getStartEndDone', 'uses' => 'AdminController@getStartEndDone']);
     });
 });
+
+Route::get('user-cancel-order/{oderId}', 'CartController@userCancelOrder')->name('userCancelOrder');
 //----------------------------------------------------------------------------------------
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');

@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\PaymentRequest;
+use App\Mail\SubmitOrderMail;
 use Carbon\Carbon;
 use Cart;
+use App\User;
+use Mail;
 use Auth;
 use App\Bills;
 use App\Customer;
@@ -114,7 +117,15 @@ class CartController extends Controller
 		foreach ($cart_content as $item_info) {
 			echo '<tr><td>'.$item_info->name.'</td><td>'.$item_info->qty.'</td><td>'.number_format($item_info->price).'vnđ</td></tr>';
 		}
-		Cart::destroy();
+
+		try {
+			$userInfo = Customer::find($customer->id);
+			$userBillInfor = Bills::where('id_customer',$customer->id)->orderBy('id', 'desc')->first();
+			Mail::to($userInfo->email)->send(new SubmitOrderMail($userInfo, $userBillInfor));
+			Cart::destroy();
+		} catch (Exception $e) {
+			Cart::destroy();
+		}
 	}
 //-------------------------------------------------------------------
 	public function postUserPayment(Request $request){
@@ -146,6 +157,23 @@ class CartController extends Controller
 		foreach ($cart_content as $item_info) {
 			echo '<tr><td>'.$item_info->name.'</td><td>'.$item_info->qty.'</td><td>'.number_format($item_info->price).'vnđ</td></tr>';
 		}
-		Cart::destroy();
+		try {
+			$userInfo = User::find(Auth::user()->id);
+			$userBillInfor = Bills::where('id_user',$userInfo->id)->orderBy('id', 'desc')->first();
+			Mail::to($userInfo->email)->send(new SubmitOrderMail($userInfo, $userBillInfor));
+			Cart::destroy();
+		} catch (Exception $e) {
+			Cart::destroy();
+		}
+	}
+
+	public function userCancelOrder($orderId){
+
+		$oderCancelDetails = BillDetail::where('id_bill', $orderId)->get();
+		foreach ($oderCancelDetails as $detail) {
+			BillDetail::destroy($detail->id);
+		}
+		Bills::destroy($orderId);
+		return view('pages.countTimeAfterDelete');
 	}
 }
