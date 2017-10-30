@@ -5310,3 +5310,7 @@ border:none;}
    border-bottom: 1px solid black;
    border-top: 1px solid black;
 }
+#huyDh{
+	min-height: 60vh;
+	text-align: center;
+}
